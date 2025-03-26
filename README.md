@@ -81,5 +81,5 @@ TinoMukaro – GitHub
 Feel free to fork this repo and create a pull request if you'd like to contribute!
 
 📄 License
-This project is licensed under the MIT License.
+This project is licensed under the Apache License.
 
