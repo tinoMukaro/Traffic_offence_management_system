@@ -1,13 +1,15 @@
 const Offender = require("../models/offenders");
+const { sendSMSNotification } = require("../services/twilioService");
 
-
+// Function to calculate adjusted fine based on penalty points
 function calculateAdjustedFine(fine_amount, totalPoints) {
     if (totalPoints >= 20) {
-      return fine_amount * 1.5;
+        return fine_amount * 1.5;
     }
     return fine_amount;
-  }
+}
 
+// Add offense function with Twilio SMS integration using the service
 const addOffense = async (req, res) => {
     try {
         const {
@@ -37,7 +39,7 @@ const addOffense = async (req, res) => {
         }
 
         // Calculate total points
-        const totalPoints = driver ? driver.total_points + penalty_points : penalty_points ;
+        const totalPoints = driver ? driver.total_points + penalty_points : penalty_points;
 
         // Apply fine increase if the driver has 20 or more points
         const adjustedFine = calculateAdjustedFine(fine_amount, totalPoints);
@@ -70,14 +72,31 @@ const addOffense = async (req, res) => {
             offense_type,
             officer_name,
             badge_number,
-            penalty_points: penalty_points,
+            penalty_points,
             fine_amount: adjustedFine,
             fine_status: "Pending", // Default fine status
         });
 
+        // Send SMS notification to the offender using the Twilio service
+        if (phone_number) {
+            const message = `
+                Traffic Offense Alert:
+                Offender: ${offender_name}
+                License: ${license_number}
+                Vehicle: ${license_plate} (${vehicle_model})
+                Offense: ${offense_type}
+                Location: ${location}
+                Fine: $${adjustedFine}
+                Points Added: ${penalty_points}
+                Status: Pending Payment
+            `;
+
+            await sendSMSNotification(phone_number, message);
+        }
+
         res.status(201).json({
             success: true,
-            message: "Offense logged successfully.",
+            message: "Offense logged successfully, and SMS notification sent.",
             data: newOffense,
         });
     } catch (error) {
@@ -85,10 +104,12 @@ const addOffense = async (req, res) => {
         res.status(500).json({
             success: false,
             message: "Failed to log offense.",
-            error: error.message, // Include the error message for debugging
+            error: error.message,
         });
     }
 };
+
+// Other controller functions (e.g., getAllOffenses, getAllOffenders, etc.)
 
 const getAllOffenses = async (req, res) => {
     try {
@@ -129,7 +150,7 @@ const getAllOffenders = async (req, res) => {
 
 const getOffensesByLicenseNumber = async (req, res) => {
     try {
-        const { license_number } = req.params; // Get license_number from URL params
+        const { license_number } = req.params;
 
         // Fetch offenses for the given license_number
         const offenses = await Offender.getOffensesByLicenseNumber(license_number);
@@ -158,7 +179,7 @@ const getOffensesByLicenseNumber = async (req, res) => {
 
 const getOffenderByLicenseNumber = async (req, res) => {
     try {
-        const { license_number } = req.params; // Get license_number from URL params
+        const { license_number } = req.params;
 
         // Fetch offender details for the given license_number
         const offender = await Offender.getOffenderByLicenseNumber(license_number);
@@ -187,8 +208,8 @@ const getOffenderByLicenseNumber = async (req, res) => {
 
 const updateFineStatus = async (req, res) => {
     try {
-        const { offenseId } = req.params; // Get offenseId from URL params
-        const { newStatus } = req.body; // Get newStatus from request body
+        const { offenseId } = req.params;
+        const { newStatus } = req.body;
 
         // Update the fine status
         const updatedOffense = await Offender.updateFineStatus(offenseId, newStatus);
@@ -220,6 +241,6 @@ module.exports = {
     getAllOffenses,
     getOffensesByLicenseNumber,
     getOffenderByLicenseNumber,
-    getAllOffenders, 
+    getAllOffenders,
     updateFineStatus,
 };
