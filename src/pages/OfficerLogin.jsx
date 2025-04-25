@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
@@ -23,7 +23,6 @@ const OfficerLogin = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Validate fields
     const newError = {};
     if (!formData.badgeNumber) newError.badgeNumber = "Badge Number is required";
     if (!formData.password) newError.password = "Password is required";
@@ -32,13 +31,11 @@ const OfficerLogin = () => {
 
     if (Object.keys(newError).length === 0) {
       try {
-        // Call the login API
         const response = await axios.post("http://localhost:5000/api/officers/login", formData);
 
         if (response.data.token) {
-          // Save the token to local storage or context
           localStorage.setItem("token", response.data.token);
-          navigate("/officer-dashboard"); // Redirect to officer dashboard
+          navigate("/officer-dashboard");
         }
       } catch (error) {
         if (error.response && error.response.data.error) {
@@ -51,40 +48,61 @@ const OfficerLogin = () => {
   };
 
   return (
-    <div className="d-flex justify-content-center align-items-center min-vh-100 bg-light">
-      <div className="card p-4 shadow-lg" style={{ maxWidth: "400px", width: "100%" }}>
-        <h2 className="text-center mb-4">Officer Login</h2>
-        {loginError && <div className="alert alert-danger">{loginError}</div>}
-        <form onSubmit={handleSubmit}>
-          <div className="mb-3">
-            <label htmlFor="badgeNumber" className="form-label">Badge Number:</label>
+    <div className="min-h-screen flex items-center justify-center bg-gray-100 px-4">
+      <div className="w-full max-w-md bg-white rounded-xl shadow-lg p-6">
+        <h2 className="text-2xl font-bold text-center text-green-600 mb-6">Officer Login</h2>
+
+        {loginError && (
+          <div className="bg-red-100 text-red-700 px-4 py-2 rounded mb-4 text-sm">
+            {loginError}
+          </div>
+        )}
+
+        <form onSubmit={handleSubmit} className="space-y-5">
+          <div>
+            <label htmlFor="badgeNumber" className="block text-sm font-medium text-gray-700 mb-1">
+              Badge Number:
+            </label>
             <input
               type="text"
               id="badgeNumber"
               name="badgeNumber"
-              className={`form-control ${error.badgeNumber ? "is-invalid" : ""}`}
+              className={`w-full border ${
+                error.badgeNumber ? "border-red-500" : "border-gray-300"
+              } rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-green-600`}
               value={formData.badgeNumber}
               onChange={handleInputChange}
             />
-            {error.badgeNumber && <div className="invalid-feedback">{error.badgeNumber}</div>}
+            {error.badgeNumber && (
+              <p className="text-red-500 text-xs mt-1">{error.badgeNumber}</p>
+            )}
           </div>
 
-          <div className="mb-3">
-            <label htmlFor="password" className="form-label">Password:</label>
+          <div>
+            <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-1">
+              Password:
+            </label>
             <input
               type="password"
               id="password"
               name="password"
-              className={`form-control ${error.password ? "is-invalid" : ""}`}
+              className={`w-full border ${
+                error.password ? "border-red-500" : "border-gray-300"
+              } rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-green-600`}
               value={formData.password}
               onChange={handleInputChange}
             />
-            {error.password && <div className="invalid-feedback">{error.password}</div>}
+            {error.password && (
+              <p className="text-red-500 text-xs mt-1">{error.password}</p>
+            )}
           </div>
 
-          <div className="d-grid mb-3">
-            <button type="submit" className="btn btn-primary">Log In</button>
-          </div>
+          <button
+            type="submit"
+            className="w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-2 rounded-lg shadow transition"
+          >
+            Log In
+          </button>
         </form>
       </div>
     </div>
