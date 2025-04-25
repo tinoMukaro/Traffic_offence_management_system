@@ -3,7 +3,7 @@ Description
 TOMS is a web-based system for managing traffic offenses, logging violations, assigning penalty points, and notifying offenders within 24 hours of an offense being logged. The system calculates fines based on offense severity and adjusts penalties for repeat offenders through a multiplier system.
 
 Tech Stack
-Frontend: Vite + React + Bootstrap
+Frontend: Vite + React + tailwind
 
 Backend: Node.js + Express.js
 
