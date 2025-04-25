@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 
 const OffenseLogging = () => {
   const [formData, setFormData] = useState({
@@ -171,142 +171,141 @@ const OffenseLogging = () => {
     });
     setValidationErrors({}); // Clear validation errors
   };
-
   return (
-    <div className="container mt-5">
-      <h2>Log Traffic Offense</h2>
-      <form onSubmit={handleSubmit}>
+    <div className="max-w-4xl mx-auto p-4 bg-gray-50">
+      <h2 className="text-2xl font-bold text-gray-900 mb-6">Log Traffic Offense</h2>
+      <form onSubmit={handleSubmit} className="space-y-6">
         {/* Header Information */}
-        <div className="card mb-4">
-          <div className="card-header">Ticket information</div>
-          <div className="card-body">
-            <div className="mb-3">
-              <label className="form-label">Issuing Authority</label>
+        <div className="bg-white rounded-lg shadow overflow-hidden">
+          <div className="bg-blue-900 px-4 py-3 text-white font-medium">Ticket information</div>
+          <div className="p-4 space-y-4">
+            <div>
+              <label className="block text-sm font-medium text-gray-900 mb-1">Issuing Authority</label>
               <input
                 type="text"
-                className="form-control"
+                className="w-full px-3 py-2 border border-gray-200 rounded-md bg-gray-100 text-gray-700"
                 name="issuing_authority"
                 value={formData.issuing_authority}
                 readOnly
               />
             </div>
             
-            <div className="mb-3">
-              <label className="form-label">Date & Time of Issue</label>
+            <div>
+              <label className="block text-sm font-medium text-gray-900 mb-1">Date & Time of Issue</label>
               <input
                 type="datetime-local"
-                className={`form-control ${validationErrors.offense_datetime ? "is-invalid" : ""}`}
+                className={`w-full px-3 py-2 border ${validationErrors.offense_datetime ? "border-red-600" : "border-gray-200"} rounded-md`}
                 name="offense_datetime"
                 value={formData.offense_datetime}
                 onChange={handleChange}
                 required
               />
               {validationErrors.offense_datetime && (
-                <div className="invalid-feedback">{validationErrors.offense_datetime}</div>
+                <div className="text-red-600 text-sm mt-1">{validationErrors.offense_datetime}</div>
               )}
             </div>
-            <div className="mb-3">
-              <label className="form-label">Location of Offense</label>
+            <div>
+              <label className="block text-sm font-medium text-gray-900 mb-1">Location of Offense</label>
               <input
                 type="text"
-                className={`form-control ${validationErrors.location ? "is-invalid" : ""}`}
+                className={`w-full px-3 py-2 border ${validationErrors.location ? "border-red-600" : "border-gray-200"} rounded-md`}
                 name="location"
                 value={formData.location}
                 onChange={handleChange}
                 required
               />
               {validationErrors.location && (
-                <div className="invalid-feedback">{validationErrors.location}</div>
+                <div className="text-red-600 text-sm mt-1">{validationErrors.location}</div>
               )}
             </div>
           </div>
         </div>
 
         {/* Offender Details */}
-        <div className="card mb-4">
-          <div className="card-header">Offender Details</div>
-          <div className="card-body">
-            <div className="mb-3">
-              <label className="form-label">Driver’s Name</label>
+        <div className="bg-white rounded-lg shadow overflow-hidden">
+          <div className="bg-blue-900 px-4 py-3 text-white font-medium">Offender Details</div>
+          <div className="p-4 space-y-4">
+            <div>
+              <label className="block text-sm font-medium text-gray-900 mb-1">Driver's Name</label>
               <input
                 type="text"
-                className={`form-control ${validationErrors.offender_name ? "is-invalid" : ""}`}
+                className={`w-full px-3 py-2 border ${validationErrors.offender_name ? "border-red-600" : "border-gray-200"} rounded-md`}
                 name="offender_name"
                 value={formData.offender_name}
                 onChange={handleChange}
                 required
               />
               {validationErrors.offender_name && (
-                <div className="invalid-feedback">{validationErrors.offender_name}</div>
+                <div className="text-red-600 text-sm mt-1">{validationErrors.offender_name}</div>
               )}
             </div>
-            <div className="mb-3">
-              <label className="form-label">Driver’s License Number</label>
+            <div>
+              <label className="block text-sm font-medium text-gray-900 mb-1">Driver's License Number</label>
               <input
                 type="text"
-                className={`form-control ${validationErrors.license_number ? "is-invalid" : ""}`}
+                className={`w-full px-3 py-2 border ${validationErrors.license_number ? "border-red-600" : "border-gray-200"} rounded-md`}
                 name="license_number"
                 value={formData.license_number}
                 onChange={handleChange}
                 required
               />
               {validationErrors.license_number && (
-                <div className="invalid-feedback">{validationErrors.license_number}</div>
+                <div className="text-red-600 text-sm mt-1">{validationErrors.license_number}</div>
               )}
             </div>
-            <div className="mb-3">
-              <label className="form-label">Driver’s Phone Number</label>
+            <div>
+              <label className="block text-sm font-medium text-gray-900 mb-1">Driver's Phone Number</label>
               <input
                 type="text"
-                className={`form-control ${validationErrors.phone_number ? "is-invalid" : ""}`}
+                className={`w-full px-3 py-2 border ${validationErrors.phone_number ? "border-red-600" : "border-gray-200"} rounded-md`}
                 name="phone_number"
                 value={formData.phone_number}
                 onChange={handleChange}
                 required
               />
               {validationErrors.phone_number && (
-                <div className="invalid-feedback">{validationErrors.phone_number}</div>
+                <div className="text-red-600 text-sm mt-1">{validationErrors.phone_number}</div>
               )}
             </div>
-            <div className="mb-3">
-              <label className="form-label">License Plate Number</label>
+            <div>
+              <label className="block text-sm font-medium text-gray-900 mb-1">License Plate Number</label>
               <input
                 type="text"
-                className={`form-control ${validationErrors.license_plate ? "is-invalid" : ""}`}
+                className={`w-full px-3 py-2 border ${validationErrors.license_plate ? "border-red-600" : "border-gray-200"} rounded-md`}
                 name="license_plate"
                 value={formData.license_plate}
                 onChange={handleChange}
                 required
               />
               {validationErrors.license_plate && (
-                <div className="invalid-feedback">{validationErrors.license_plate}</div>
+                <div className="text-red-600 text-sm mt-1">{validationErrors.license_plate}</div>
               )}
             </div>
-            <div className="mb-3">
-              <label className="form-label">Vehicle Model</label>
+            <div>
+              <label className="block text-sm font-medium text-gray-900 mb-1">Vehicle Model</label>
               <input
                 type="text"
-                className={`form-control ${validationErrors.vehicle_model ? "is-invalid" : ""}`}
+                className={`w-full px-3 py-2 border ${validationErrors.vehicle_model ? "border-red-600" : "border-gray-200"} rounded-md`}
                 name="vehicle_model"
                 value={formData.vehicle_model}
                 onChange={handleChange}
                 required
               />
               {validationErrors.vehicle_model && (
-                <div className="invalid-feedback">{validationErrors.vehicle_model}</div>
+                <div className="text-red-600 text-sm mt-1">{validationErrors.vehicle_model}</div>
               )}
             </div>
           </div>
         </div>
 
         {/* Offense Details */}
-        <div className="card mb-4">
-          <div className="card-header">Offense Details</div>
-          <div className="card-body">
-            <div className="mb-3">
-              <label className="form-label">Type of Violation</label>
+        <div className="bg-white rounded-lg shadow overflow-hidden">
+          <div className="bg-blue-900 px-4 py-3 text-white font-medium">Offense Details</div>
+          <div className="p-4 space-y-4">
+            <div>
+              <label className="block text-sm font-medium text-gray-900 mb-1">Type of Violation</label>
               <select
-                className={`form-control ${validationErrors.offense_type ? "is-invalid" : ""}`}
+                className={`w-full px-3 py-2 border ${validationErrors.offense_type ? "border-red-600" : "border-gray-200"} rounded-md`}
                 name="offense_type"
                 value={
                   offenses.find((offense) => offense.offense_description === formData.offense_type)?.id || ""
@@ -322,44 +321,45 @@ const OffenseLogging = () => {
                 ))}
               </select>
               {validationErrors.offense_type && (
-                <div className="invalid-feedback">{validationErrors.offense_type}</div>
+                <div className="text-red-600 text-sm mt-1">{validationErrors.offense_type}</div>
               )}
             </div>
-            <div className="mb-3">
-              <label className="form-label">Description of Offense</label>
+            <div>
+              <label className="block text-sm font-medium text-gray-900 mb-1">Description of Offense</label>
               <textarea
-                className={`form-control ${validationErrors.offense_description ? "is-invalid" : ""}`}
+                className={`w-full px-3 py-2 border ${validationErrors.offense_description ? "border-red-600" : "border-gray-200"} rounded-md`}
                 name="offense_description"
                 value={formData.offense_description}
                 onChange={handleChange}
                 required
+                rows="3"
               />
               {validationErrors.offense_description && (
-                <div className="invalid-feedback">{validationErrors.offense_description}</div>
+                <div className="text-red-600 text-sm mt-1">{validationErrors.offense_description}</div>
               )}
             </div>
           </div>
         </div>
 
         {/* Penalty & Payment Information */}
-        <div className="card mb-4">
-          <div className="card-header">Penalty & Payment Information</div>
-          <div className="card-body">
-            <div className="mb-3">
-              <label className="form-label">Fine Amount</label>
+        <div className="bg-white rounded-lg shadow overflow-hidden">
+          <div className="bg-blue-900 px-4 py-3 text-white font-medium">Penalty & Payment Information</div>
+          <div className="p-4 space-y-4">
+            <div>
+              <label className="block text-sm font-medium text-gray-900 mb-1">Fine Amount</label>
               <input
                 type="number"
-                className="form-control"
+                className="w-full px-3 py-2 border border-gray-200 rounded-md bg-gray-100 text-gray-700"
                 name="fine_amount"
                 value={formData.fine_amount}
                 readOnly
               />
             </div>
-            <div className="mb-3">
-              <label className="form-label">Penalty Points</label>
+            <div>
+              <label className="block text-sm font-medium text-gray-900 mb-1">Penalty Points</label>
               <input
                 type="number"
-                className="form-control"
+                className="w-full px-3 py-2 border border-gray-200 rounded-md bg-gray-100 text-gray-700"
                 name="penalty_points"
                 value={formData.penalty_points}
                 readOnly
@@ -369,49 +369,57 @@ const OffenseLogging = () => {
         </div>
 
         {/* Officer Information */}
-        <div className="card mb-4">
-          <div className="card-header">Officer Information</div>
-          <div className="card-body">
-            <div className="mb-3">
-              <label className="form-label">Officer’s Name</label>
+        <div className="bg-white rounded-lg shadow overflow-hidden">
+          <div className="bg-blue-900 px-4 py-3 text-white font-medium">Officer Information</div>
+          <div className="p-4 space-y-4">
+            <div>
+              <label className="block text-sm font-medium text-gray-900 mb-1">Officer's Name</label>
               <input
                 type="text"
-                className={`form-control ${validationErrors.officer_name ? "is-invalid" : ""}`}
+                className={`w-full px-3 py-2 border ${validationErrors.officer_name ? "border-red-600" : "border-gray-200"} rounded-md`}
                 name="officer_name"
                 value={formData.officer_name}
                 onChange={handleChange}
                 required
               />
               {validationErrors.officer_name && (
-                <div className="invalid-feedback">{validationErrors.officer_name}</div>
+                <div className="text-red-600 text-sm mt-1">{validationErrors.officer_name}</div>
               )}
             </div>
-            <div className="mb-3">
-              <label className="form-label">Badge Number</label>
+            <div>
+              <label className="block text-sm font-medium text-gray-900 mb-1">Badge Number</label>
               <input
                 type="text"
-                className={`form-control ${validationErrors.badge_number ? "is-invalid" : ""}`}
+                className={`w-full px-3 py-2 border ${validationErrors.badge_number ? "border-red-600" : "border-gray-200"} rounded-md`}
                 name="badge_number"
                 value={formData.badge_number}
                 onChange={handleChange}
                 required
               />
               {validationErrors.badge_number && (
-                <div className="invalid-feedback">{validationErrors.badge_number}</div>
+                <div className="text-red-600 text-sm mt-1">{validationErrors.badge_number}</div>
               )}
             </div>
           </div>
         </div>
 
-        <div className="d-flex gap-2">
-          <button type="submit" className="btn btn-primary" disabled={loading}>
+        <div className="flex gap-2">
+          <button 
+            type="submit" 
+            className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50"
+            disabled={loading}
+          >
             {loading ? "Logging..." : "Log Offense"}
           </button>
-          <button type="button" className="btn btn-secondary" onClick={handleReset}>
+          <button 
+            type="button" 
+            className="px-4 py-2 bg-gray-500 text-white rounded-md hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2"
+            onClick={handleReset}
+          >
             Reset
           </button>
         </div>
-        {error && <div className="text-danger mt-3">{error}</div>}
+        {error && <div className="text-red-600 mt-3">{error}</div>}
       </form>
     </div>
   );
