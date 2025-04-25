@@ -1,82 +1,47 @@
-import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 const TrafficOfficerDashboard = () => {
   const navigate = useNavigate();
-  const [recentOffenses, setRecentOffenses] = useState([]);
-  const [stats, setStats] = useState({ topOffense: "N/A" });
-
-  useEffect(() => {
-    // Fetch recent offenses (dummy data for now)
-    setRecentOffenses([
-      { id: 1, type: "Speeding", date: "2025-03-05" },
-      { id: 2, type: "Running Red Light", date: "2025-03-05" },
-      { id: 3, type: "Illegal Parking", date: "2025-03-04" },
-    ]);
-
-    // Fetch stats (dummy data for now)
-    setStats({ topOffense: "Speeding" });
-  }, []);
 
   return (
-    <div className="container mt-5">
-      <h2 className="text-center mb-4">WELCOME</h2>
-    
-      
-      {/* Stats Widget */}
-      <div className="row d-flex justify-content-center gap-3">
-        <div className="col-md-3">
-          <div className="card text-white bg-danger mb-3 text-center">
-            <div className="card-body">
-              <h5 className="card-title">Most Common Offense</h5>
-              <p className="card-text display-6">{stats.topOffense}</p>
-            </div>
-          </div>
+    <div className="min-h-screen bg-gradient-to-br from-gray-100 to-gray-300 flex flex-col items-center justify-center p-6">
+      <h2 className="text-4xl font-bold text-gray-800 mb-12 drop-shadow-md">
+        👮‍♂️ Welcome, Officer
+      </h2>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl w-full">
+        {/* Card 1 */}
+        <div className="bg-white/80 backdrop-blur-md rounded-2xl shadow-xl p-6 flex flex-col items-center text-center transition-transform transform hover:scale-105 hover:shadow-blue-400">
+          <h3 className="text-xl font-semibold text-blue-700 mb-2">Log an Offense</h3>
+          <p className="text-gray-700 mb-4 text-sm">Record a traffic offense in the system.</p>
+          <button
+            onClick={() => navigate("/log-offense")}
+            className="bg-blue-600 text-white px-5 py-2 rounded-full font-medium shadow hover:bg-blue-700 transition duration-200"
+          >
+            Log Offense
+          </button>
+        </div>
+
+        {/* Card 2 */}
+        <div className="bg-white/80 backdrop-blur-md rounded-2xl shadow-xl p-6 flex flex-col items-center text-center transition-transform transform hover:scale-105 hover:shadow-yellow-300">
+          <h3 className="text-xl font-semibold text-yellow-700 mb-2">View Logged Offenses</h3>
+          <p className="text-gray-700 mb-4 text-sm">Check and manage logged offenses.</p>
+          <button
+            onClick={() => navigate("/view-offenses")}
+            className="bg-yellow-500 text-white px-5 py-2 rounded-full font-medium shadow hover:bg-yellow-600 transition duration-200"
+          >
+            View Offenses
+          </button>
         </div>
       </div>
-      
-      {/* Existing Functionality */}
-      <div className="row d-flex justify-content-center gap-3">
-        <div className="col-md-3">
-          <div className="card text-white bg-primary mb-3 text-center">
-            <div className="card-body">
-              <h5 className="card-title">Log an Offense</h5>
-              <p className="card-text">Record a traffic offense in the system.</p>
-              <button onClick={() => navigate("/log-offense")} className="btn btn-light">Log an Offense</button>
-            </div>
-          </div>
-        </div>
-        <div className="col-md-3">
-          <div className="card text-white bg-warning mb-3 text-center">
-            <div className="card-body">
-              <h5 className="card-title">View Logged Offenses</h5>
-              <p className="card-text">Check and manage logged offenses.</p>
-              <button onClick={() => navigate("/view-offenses")} className="btn btn-light">View Logged Offenses</button>
-            </div>
-          </div>
-        </div>
-      </div>
-      
-      {/* Recent Offenses Summary */}
-      <div className="card mt-4 p-3">
-        <h5 className="text-center">Recent Offenses</h5>
-        <ul className="list-group">
-          {recentOffenses.map((offense) => (
-            <li key={offense.id} className="list-group-item">
-              {offense.type} - {offense.date}
-            </li>
-          ))}
-        </ul>
-      </div>
-      
-      {/* Logout Button */}
-      <div className="text-center mt-4">
+
+      {/* Log Out Button */}
+      <div className="mt-12">
         <button
-          className="btn text-white fw-bold py-3"
-          style={{ backgroundColor: "#dc3545" }}
           onClick={() => navigate("/")}
+          className="bg-red-600 text-white px-8 py-3 rounded-full font-semibold shadow-lg hover:bg-red-700 hover:scale-105 transition-all duration-300"
         >
-          Log Out
+          🚪 Log Out
         </button>
       </div>
     </div>
