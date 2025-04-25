@@ -1,48 +1,69 @@
-import React from "react";
 import { Link } from "react-router-dom";
 
 const AdminDashboard = () => {
   return (
-    <div className="container mt-5">
-      <h2 className="text-center mb-4">WELCOME</h2>
-      <div className="row d-flex justify-content-center gap-3">
-        <div className="col-md-3">
-          <div className="card text-white bg-primary mb-3 text-center">
-            <div className="card-body">
-              <h5 className="card-title">Manage Users</h5>
-              <p className="card-text">Oversee system users and permissions.</p>
-              <Link to="/admin-users" className="btn btn-light">Manage Users</Link>
-            </div>
-          </div>
+    <div className="min-h-screen bg-gradient-to-br from-gray-100 to-gray-300 py-12 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto">
+        {/* Dashboard Heading */}
+        <div className="text-center mb-12">
+          <h2 className="text-4xl font-extrabold text-gray-800 drop-shadow-md">Welcome, Admin</h2>
+          <p className="mt-2 text-gray-600 text-lg">
+            Manage users, offenses, penalties, and more.
+          </p>
         </div>
-        
-        <div className="col-md-3">
-          <div className="card text-white bg-warning mb-3 text-center">
-            <div className="card-body">
-              <h5 className="card-title">View Offenses</h5>
-              <p className="card-text">Check and manage traffic offenses.</p>
-              <Link to="/view-offenses" className="btn btn-light">View Offenses</Link>
-            </div>
+
+        {/* Dashboard Cards */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          {/* Manage Users */}
+          <div className="bg-white/80 backdrop-blur-md rounded-2xl shadow-xl p-6 flex flex-col items-center text-center transition-transform transform hover:scale-105 hover:shadow-blue-400">
+            <div className="text-3xl mb-2">👥</div>
+            <h5 className="text-xl font-semibold text-blue-700 mb-1">Manage Users</h5>
+            <p className="text-gray-700 mb-4 text-sm">Oversee system users and permissions.</p>
+            <Link
+              to="/admin-users"
+              className="bg-blue-600 text-white px-5 py-2 rounded-full font-medium shadow hover:bg-blue-700 transition duration-200"
+            >
+              Go to Users
+            </Link>
           </div>
-        </div>
-        
-        <div className="col-md-3">
-          <div className="card text-white bg-success mb-3 text-center">
-            <div className="card-body">
-              <h5 className="card-title">Update Offenses</h5>
-              <p className="card-text">Update fine amounts and Penalty points</p>
-              <Link to="/update-offense" className="btn btn-light">Update offenses</Link>
-            </div>
+
+          {/* View Offenses */}
+          <div className="bg-white/80 backdrop-blur-md rounded-2xl shadow-xl p-6 flex flex-col items-center text-center transition-transform transform hover:scale-105 hover:shadow-yellow-300">
+            <div className="text-3xl mb-2">📄</div>
+            <h5 className="text-xl font-semibold text-yellow-700 mb-1">View Offenses</h5>
+            <p className="text-gray-700 mb-4 text-sm">Check and manage traffic offenses.</p>
+            <Link
+              to="/view-offenses"
+              className="bg-yellow-500 text-white px-5 py-2 rounded-full font-medium shadow hover:bg-yellow-600 transition duration-200"
+            >
+              View Now
+            </Link>
           </div>
-        </div>
-        
-        <div className="col-md-3">
-          <div className="card text-white bg-danger mb-3 text-center">
-            <div className="card-body">
-              <h5 className="card-title">Log Out</h5>
-              <p className="card-text">Exit the admin dashboard.</p>
-              <Link to="/" className="btn btn-light">Log Out</Link>
-            </div>
+
+          {/* Update Offenses */}
+          <div className="bg-white/80 backdrop-blur-md rounded-2xl shadow-xl p-6 flex flex-col items-center text-center transition-transform transform hover:scale-105 hover:shadow-green-400">
+            <div className="text-3xl mb-2">🛠️</div>
+            <h5 className="text-xl font-semibold text-green-700 mb-1">Update Offenses</h5>
+            <p className="text-gray-700 mb-4 text-sm">Adjust fines and penalty points.</p>
+            <Link
+              to="/update-offense"
+              className="bg-green-600 text-white px-5 py-2 rounded-full font-medium shadow hover:bg-green-700 transition duration-200"
+            >
+              Update Now
+            </Link>
+          </div>
+
+          {/* Log Out */}
+          <div className="bg-white/80 backdrop-blur-md rounded-2xl shadow-xl p-6 flex flex-col items-center text-center transition-transform transform hover:scale-105 hover:shadow-red-400">
+            <div className="text-3xl mb-2">🚪</div>
+            <h5 className="text-xl font-semibold text-red-700 mb-1">Log Out</h5>
+            <p className="text-gray-700 mb-4 text-sm">Exit the admin dashboard safely.</p>
+            <Link
+              to="/"
+              className="bg-red-600 text-white px-5 py-2 rounded-full font-medium shadow hover:bg-red-700 transition duration-200"
+            >
+              Log Out
+            </Link>
           </div>
         </div>
       </div>
@@ -51,3 +72,4 @@ const AdminDashboard = () => {
 };
 
 export default AdminDashboard;
+
