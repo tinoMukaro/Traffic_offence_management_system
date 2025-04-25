@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { Table, Button, Modal } from "react-bootstrap";
 import axios from "axios";
-import { useNavigate } from "react-router-dom"; // Import useNavigate for navigation
+import { useNavigate } from "react-router-dom";
 
 const ViewOffenses = () => {
   const [offenses, setOffenses] = useState([]);
@@ -9,24 +8,19 @@ const ViewOffenses = () => {
   const [showModal, setShowModal] = useState(false);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const navigate = useNavigate(); // Initialize useNavigate
+  const navigate = useNavigate();
 
-  // Fetch offenses data from the backend
   useEffect(() => {
     const fetchOffenses = async () => {
       try {
-        console.log("Fetching offenses...");
         const response = await axios.get("http://localhost:5000/api/offenders/offenses/all");
-        console.log("API Response:", response.data); // Log the entire response
-        setOffenses(response.data.data || []); // Use response.data.data to get the array of offenses
-      } catch (error) {
-        console.error("Error fetching offenses:", error);
+        setOffenses(response.data.data || []);
+      } catch {
         setError("Failed to fetch offenses. Please try again later.");
       } finally {
         setLoading(false);
       }
     };
-
     fetchOffenses();
   }, []);
 
@@ -43,9 +37,8 @@ const ViewOffenses = () => {
       );
 
       if (response.data.success) {
-        // Update the offenses state to reflect the change
-        setOffenses((prevOffenses) =>
-          prevOffenses.map((offense) =>
+        setOffenses((prev) =>
+          prev.map((offense) =>
             offense.id === offenseId ? { ...offense, fine_status: "Paid" } : offense
           )
         );
@@ -53,105 +46,104 @@ const ViewOffenses = () => {
       } else {
         alert("Failed to update fine status.");
       }
-    } catch (error) {
-      console.error("Error updating fine status:", error);
+    } catch {
       alert("Failed to update fine status. Please try again.");
     }
   };
 
   const handleViewOffenders = () => {
-    navigate("/offenders"); // Navigate to the offenders page
+    navigate("/offenders");
   };
 
-  if (loading) {
-    return <div>Loading offenses...</div>;
-  }
-
-  if (error) {
-    return <div className="text-danger">{error}</div>;
-  }
-
-  console.log("Offenses State:", offenses); // Log the offenses state
+  if (loading) return <div className="p-4">Loading offenses...</div>;
+  if (error) return <div className="text-red-600 p-4">{error}</div>;
 
   return (
-    <div className="container mt-4">
-      <div className="d-flex justify-content-between align-items-center mb-3">
-        <h2>View Offenses</h2>
-        <Button variant="primary" onClick={handleViewOffenders}>
+    <div className="p-6 bg-gray-50 min-h-screen">
+      <div className="flex justify-between items-center mb-4">
+        <h2 className="text-2xl font-bold text-gray-900">View Offenses</h2>
+        <button
+          onClick={handleViewOffenders}
+          className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition"
+        >
           View Offenders
-        </Button>
+        </button>
       </div>
-      <Table striped bordered hover>
-        <thead>
-          <tr>
-            <th>License Plate</th>
-            <th>Offender Name</th>
-            <th>Offense Type</th>
-            <th>Date & Time</th>
-            <th>Penalty Points</th>
-            <th>Fine Amount</th>
-            <th>Status</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          {offenses.length > 0 ? (
-            offenses.map((offense) => (
-              <tr key={offense.id}>
-                <td>{offense.license_plate}</td>
-                <td>{offense.offender_name}</td>
-                <td>{offense.offense_type}</td>
-                <td>{new Date(offense.offense_datetime).toLocaleString()}</td>
-                <td>{offense.penalty_points}</td>
-                <td>${offense.fine_amount}</td>
-                <td>
-                  <span
-                    className={
-                      offense.fine_status === "Unpaid" ? "text-danger" : "text-success"
-                    }
-                  >
-                    {offense.fine_status}
-                  </span>
-                </td>
-                <td>
-                  <Button
-                    variant="info"
-                    size="sm"
-                    onClick={() => handleViewDetails(offense)}
-                  >
-                    View Details
-                  </Button>
-                  {offense.fine_status === "Pending" && (
-                    <Button
-                      variant="success"
-                      size="sm"
-                      onClick={() => handleClearFine(offense.id)}
-                      className="ms-2"
+
+      <div className="overflow-x-auto bg-white rounded shadow">
+        <table className="min-w-full divide-y divide-gray-200">
+          <thead className="bg-gray-100">
+            <tr>
+              <th className="px-4 py-2 text-left text-sm font-medium text-gray-500">License Plate</th>
+              <th className="px-4 py-2 text-left text-sm font-medium text-gray-500">Offender Name</th>
+              <th className="px-4 py-2 text-left text-sm font-medium text-gray-500">Offense Type</th>
+              <th className="px-4 py-2 text-left text-sm font-medium text-gray-500">Date & Time</th>
+              <th className="px-4 py-2 text-left text-sm font-medium text-gray-500">Penalty Points</th>
+              <th className="px-4 py-2 text-left text-sm font-medium text-gray-500">Fine Amount</th>
+              <th className="px-4 py-2 text-left text-sm font-medium text-gray-500">Status</th>
+              <th className="px-4 py-2 text-left text-sm font-medium text-gray-500">Actions</th>
+            </tr>
+          </thead>
+          <tbody className="divide-y divide-gray-200">
+            {offenses.length > 0 ? (
+              offenses.map((offense) => (
+                <tr key={offense.id} className="hover:bg-gray-50">
+                  <td className="px-4 py-2 text-sm text-gray-900">{offense.license_plate}</td>
+                  <td className="px-4 py-2 text-sm text-gray-900">{offense.offender_name}</td>
+                  <td className="px-4 py-2 text-sm text-gray-900">{offense.offense_type}</td>
+                  <td className="px-4 py-2 text-sm text-gray-900">
+                    {new Date(offense.offense_datetime).toLocaleString()}
+                  </td>
+                  <td className="px-4 py-2 text-sm text-gray-900">{offense.penalty_points}</td>
+                  <td className="px-4 py-2 text-sm text-gray-900">${offense.fine_amount}</td>
+                  <td className="px-4 py-2 text-sm">
+                    <span
+                      className={`font-semibold ${
+                        offense.fine_status === "Unpaid"
+                          ? "text-red-600"
+                          : offense.fine_status === "Paid"
+                          ? "text-green-600"
+                          : "text-yellow-500"
+                      }`}
                     >
-                      Clear
-                    </Button>
-                  )}
+                      {offense.fine_status}
+                    </span>
+                  </td>
+                  <td className="px-4 py-2 flex flex-wrap gap-2">
+                    <button
+                      onClick={() => handleViewDetails(offense)}
+                      className="bg-blue-600 text-white px-3 py-1 rounded text-sm hover:bg-blue-700"
+                    >
+                      View Details
+                    </button>
+                    {offense.fine_status === "Pending" && (
+                      <button
+                        onClick={() => handleClearFine(offense.id)}
+                        className="bg-green-600 text-white px-3 py-1 rounded text-sm hover:bg-green-700"
+                      >
+                        Clear
+                      </button>
+                    )}
+                  </td>
+                </tr>
+              ))
+            ) : (
+              <tr>
+                <td colSpan="8" className="text-center py-4 text-gray-500">
+                  No offenses found.
                 </td>
               </tr>
-            ))
-          ) : (
-            <tr>
-              <td colSpan="8" className="text-center">
-                No offenses found.
-              </td>
-            </tr>
-          )}
-        </tbody>
-      </Table>
+            )}
+          </tbody>
+        </table>
+      </div>
 
-      {/* Modal for offense details */}
-      <Modal show={showModal} onHide={() => setShowModal(false)}>
-        <Modal.Header closeButton>
-          <Modal.Title>Offense Details</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          {selectedOffense && (
-            <div>
+      {/* Modal */}
+      {showModal && selectedOffense && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
+          <div className="bg-white rounded-lg w-full max-w-md p-6 shadow-lg relative">
+            <h3 className="text-xl font-bold mb-4 text-gray-900">Offense Details</h3>
+            <div className="space-y-2 text-sm text-gray-700">
               <p><strong>Offender Name:</strong> {selectedOffense.offender_name}</p>
               <p><strong>License Plate:</strong> {selectedOffense.license_plate}</p>
               <p><strong>Offense Type:</strong> {selectedOffense.offense_type}</p>
@@ -160,14 +152,17 @@ const ViewOffenses = () => {
               <p><strong>Fine Amount:</strong> ${selectedOffense.fine_amount}</p>
               <p><strong>Status:</strong> {selectedOffense.fine_status}</p>
             </div>
-          )}
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={() => setShowModal(false)}>
-            Close
-          </Button>
-        </Modal.Footer>
-      </Modal>
+            <div className="mt-6 flex justify-end">
+              <button
+                onClick={() => setShowModal(false)}
+                className="bg-gray-300 hover:bg-gray-400 text-gray-800 px-4 py-2 rounded"
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
