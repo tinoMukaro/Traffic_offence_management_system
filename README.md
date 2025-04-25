@@ -1,8 +1,8 @@
-🚦 Traffic Offence Management System (TOMS)
-📌 Description
+Traffic Offence Management System (TOMS)
+Description
 TOMS is a web-based system for managing traffic offenses, logging violations, assigning penalty points, and notifying offenders within 24 hours of an offense being logged. The system calculates fines based on offense severity and adjusts penalties for repeat offenders through a multiplier system.
 
-🛠️ Tech Stack
+Tech Stack
 Frontend: Vite + React + Bootstrap
 
 Backend: Node.js + Express.js
@@ -11,7 +11,7 @@ Database: PostgreSQL
 
 Architecture: MVC
 
-🚀 Features
+Features
 ✅ Log traffic offenses
 ✅ Assign penalty points based on severity
 ✅ Send notifications to offenders
@@ -30,21 +30,13 @@ Edit
 ⚙️ Setup
 Clone the repo
 
-bash
-git clone https://github.com/your-username/toms.git
-Navigate to the project
 
-bash
-cd toms
-Install dependencies
-
-bash
 # Install frontend dependencies
 cd frontend
 npm install
 
 # Install backend dependencies
-cd ../backend
+cd backend
 npm install
 Create a .env file in the backend folder with the following structure:
 
@@ -56,12 +48,12 @@ Run the project
 
 Start the frontend:
 
-bash
+
 cd frontend
 npm run dev
 Start the backend:
 
-bash
+
 cd backend
 npm run dev
 ✅ How It Works
