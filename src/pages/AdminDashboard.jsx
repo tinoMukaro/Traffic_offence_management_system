@@ -1,9 +1,25 @@
 import { Link } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
 
 const AdminDashboard = () => {
+
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    console.log("Logging out...");
+    navigate("/");
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-100 to-gray-300 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
+
+      <button
+            onClick={handleLogout}
+            className="px-6 py-2 rounded-md border border-gray-200 bg-white text-black hover:bg-red-600 hover:text-white transition"
+          >
+            Logout
+          </button>
         {/* Dashboard Heading */}
         <div className="text-center mb-12">
           <h2 className="text-4xl font-extrabold text-gray-800 drop-shadow-md">Welcome, Admin</h2>
@@ -53,16 +69,16 @@ const AdminDashboard = () => {
             </Link>
           </div>
 
-          {/* Log Out */}
+          {/* cron job */}
           <div className="bg-white/80 backdrop-blur-md rounded-2xl shadow-xl p-6 flex flex-col items-center text-center transition-transform transform hover:scale-105 hover:shadow-red-400">
             <div className="text-3xl mb-2">🚪</div>
-            <h5 className="text-xl font-semibold text-red-700 mb-1">Log Out</h5>
-            <p className="text-gray-700 mb-4 text-sm">Exit the admin dashboard safely.</p>
+            <h5 className="text-xl font-semibold text-red-700 mb-1">Penalty Points</h5>
+            <p className="text-gray-700 mb-4 text-sm">View Penalty Points Reduced</p>
             <Link
-              to="/"
+              to="/penalty-points"
               className="bg-red-600 text-white px-5 py-2 rounded-full font-medium shadow hover:bg-red-700 transition duration-200"
             >
-              Log Out
+              View Now
             </Link>
           </div>
         </div>
