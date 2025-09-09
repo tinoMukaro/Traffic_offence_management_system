@@ -1,14 +1,12 @@
 Traffic Offence Management System (TOMS)
 Description
-TOMS is a web-based system for managing traffic offenses, logging violations, assigning penalty points, and notifying offenders within 24 hours of an offense being logged. The system calculates fines based on offense severity and adjusts penalties for repeat offenders through a multiplier system.
+TOMS is a web-based system for managing traffic offenses, logging violations, assigning penalty points, and notifying offenders within 24 hours of an offense being logged. The system calculates fines based on offense severity and adjusts penalties for repeat offenders through a multiplier system. It aims to reduce the occurance of repeat offenders who repeatedly commit traffic offences.
 
 Tech Stack
-Frontend: Vite + React + tailwind
-
+Frontend: Vite + React.js + tailwind
 Backend: Node.js + Express.js
-
+SMS service Twilio
 Database: PostgreSQL
-
 Architecture: MVC
 
 Features
@@ -19,17 +17,15 @@ Features
 ✅ Decay penalty points over time
 
 📂 Folder Structure
-bash
-Copy
 Edit
 ├── backend/        # Backend code (Node.js + Express.js)
 ├── frontend/       # Frontend code (Vite + React)
 ├── .gitignore
 ├── README.md
 └── package.json
-⚙️ Setup
-Clone the repo
 
+⚙️ Setup
+Clone the repo: https://github.com/tinoMukaro/traffic_offence_management_system.git
 
 # Install frontend dependencies
 cd frontend
@@ -44,25 +40,21 @@ env
 DB_HOST=your-db-host
 DB_USER=your-db-user
 DB_PASS=your-db-password
+
+
 Run the project
-
-Start the frontend:
-
-
+#Start the frontend:
 cd frontend
 npm run dev
-Start the backend:
 
-
+#Start the backend:
 cd backend
 npm run dev
+
 ✅ How It Works
 Admin and traffic officers can log offenses.
-
 The system assigns penalty points based on the severity of the offense.
-
 Repeat offenses increase fines via a penalty multiplier.
-
 Offenders are notified within 24 hours of an offense.
 
 
