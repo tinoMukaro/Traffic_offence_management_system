@@ -1,13 +1,16 @@
 Traffic Offence Management System (TOMS)
 Description
-TOMS is a web-based system for managing traffic offenses, logging violations, assigning penalty points, and notifying offenders within 24 hours of an offense being logged. The system calculates fines based on offense severity and adjusts penalties for repeat offenders through a multiplier system. It aims to reduce the occurance of repeat offenders who repeatedly commit traffic offences.
+**TOMS** is a web-based system for managing traffic offenses. 
+It allows authorities to log violations, assign penalty points, notify offenders within 24 hours, and dynamically calculate fines based on offense severity.
+It also increases fines for repeat offenders using a multiplier system — aiming to reduce repeat offenses over time.
+
 
 Tech Stack
-Frontend: Vite + React.js + tailwind
-Backend: Node.js + Express.js
-SMS service Twilio
-Database: PostgreSQL
-Architecture: MVC
+Frontend: [Vite]+ [React.js] + [TailwindCSS]
+Backend: [Node.js]+ [Express.js]
+Database: [PostgreSQL]
+SMS Service: [Twilio]
+Architecture: MVC (Model–View–Controller) |
 
 Features
 ✅ Log traffic offenses
@@ -28,18 +31,36 @@ Edit
 Clone the repo: https://github.com/tinoMukaro/traffic_offence_management_system.git
 
 # Install frontend dependencies
-cd frontend
 npm install
 
 # Install backend dependencies
 cd backend
 npm install
-Create a .env file in the backend folder with the following structure:
 
-env
+#twilio setup
+visit https://www.twilio.com/en-us/messaging/channels/sms
+create a free account and youll get TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN, TWILIO_PHONE_NUMBER
+enter those 3 in the /backend/.env file
+
+#Database Setup (PostgreSQL)
+1. Install PostgreSQL
+If you don’t already have it installed, download and install it from:
+https://www.postgresql.org/download/
+2. Create a Database
+Open your terminal or pgAdmin and create a new database for TOMS:
+CREATE DATABASE toms_db;
+
+
+#Create a .env file in the backend folder with the following structure:
+.env/
 DB_HOST=your-db-host
 DB_USER=your-db-user
 DB_PASS=your-db-password
+JWT_SECRET=enter-your-jwt-token
+JWT_EXPIRES_IN=1d
+TWILIO_ACCOUNT_SID=your-twilio-account-sid
+TWILIO_AUTH_TOKEN=your-twilio-auth-token
+TWILIO_PHONE_NUMBER=your-twilio-phone-number
 
 
 Run the project
