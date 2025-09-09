@@ -78,6 +78,9 @@ The system assigns penalty points based on the severity of the offense.
 Repeat offenses increase fines via a penalty multiplier.
 Offenders are notified within 24 hours of an offense.
 
+✅ Possible upgrades:
+payment integration
+connection to the central vehicle registry(CVR) database to capture valid license
 
 👨‍💻 Author
 TinoMukaro – GitHub
